@@ -29,11 +29,6 @@
     "test": "jest --watchAll",
     "deploy": "gh-pages -d build"
   },
-  "jest": {
-    "setupFiles": [
-      "./tests/setup.js"
-    ]
-  },
   "babel": {
     "presets": [
       "@babel/preset-env",
