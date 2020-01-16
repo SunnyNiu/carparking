@@ -30,7 +30,11 @@ fs.readFile('./fs.txt', 'utf8', (err, data) => {
     }
 
     if (array[i] === 'REPORT') {
-      console.log('REPORT', obj)
+      const output = `position is [${obj.x},${obj.y}] and car is facing ${obj.facing}`
+      fs.writeFile('./output.text', output, 'utf8', (err) => {
+        if (err) throw err
+        console.log('Output has been saved!')
+      })
       continue
     }
   }
