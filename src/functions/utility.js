@@ -90,7 +90,7 @@ export function movePosition(obj) {
 
   return obj;
 }
-fs.readFile('./fs.txt', 'utf8', (err, data) => {
+fs.readFile('src/functions/fs.txt', 'utf8', (err, data) => {
   if (err) throw err;
   const array = data.split('\n');
 
