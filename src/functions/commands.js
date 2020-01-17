@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 export class TurnCommand {
   constructor(direction) {
     this.direction = direction;
@@ -35,5 +36,24 @@ export class TurnCommand {
     }
 
     return { x, y, facing: updatedFacing };
+  }
+}
+
+export class ReportCommand {
+  constructor(report) {
+    this.report = report;
+  }
+
+  static tryParse(commandString) {
+    if (commandString !== 'REPORT') {
+      return null;
+    }
+    return new ReportCommand(commandString);
+  }
+
+  execute({ x, y, facing }) {
+    const result = `${x},${y},${facing}`;
+    console.log(result);
+    return { x, y, facing };
   }
 }
