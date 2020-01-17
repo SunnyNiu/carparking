@@ -1,13 +1,13 @@
-function createMatrix () {
-  const matrix = []
+function createMatrix() {
+  const matrix = [];
   for (let i = 0; i < 5; i++) {
-    const arr = []
+    const arr = [];
     for (let j = 0; j < 5; j++) {
-      arr[i, j] = false
+      arr[(i, j)] = false;
     }
-    matrix.push(arr)
+    matrix.push(arr);
   }
-  return matrix
+  return matrix;
 }
 
-export default createMatrix
+export default createMatrix;

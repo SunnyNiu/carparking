@@ -1,107 +1,114 @@
-const fs = require('fs')
+const fs = require('fs');
 fs.readFile('./fs.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  const array = data.split('\n')
+  if (err) throw err;
+  const array = data.split('\n');
 
-  let obj = {}
+  let obj = {};
 
   for (let i = 0; i < array.length; i++) {
-    if (array[i].includes('PLACE') && array[i].split(' ').indexOf('PLACE') === 0) {
+    if (
+      array[i].includes('PLACE') &&
+      array[i].split(' ').indexOf('PLACE') === 0
+    ) {
       if (isPlaceCommand(array[i])) {
-        const [x, y, facing] = array[i].split(' ')[1].split(',')
+        const [x, y, facing] = array[i].split(' ')[1].split(',');
 
         obj = {
           x: parseInt(x, 10),
           y: parseInt(y, 10),
-          facing: facing
-        }
+          facing: facing,
+        };
       }
-      continue
+      continue;
     }
 
     if (array[i] === 'MOVE') {
-      obj = movePosition(obj)
-      continue
+      obj = movePosition(obj);
+      continue;
     }
 
     if (array[i] === 'LEFT' || array[i] === 'RIGHT') {
-      obj = turnDirection(array[i], obj)
-      continue
+      obj = turnDirection(array[i], obj);
+      continue;
     }
 
     if (array[i] === 'REPORT') {
-      const output = `position is [${obj.x},${obj.y}] and car is facing ${obj.facing}`
-      fs.writeFile('./output.text', output, 'utf8', (err) => {
-        if (err) throw err
-        console.log('Output has been saved!')
-      })
-      continue
+      const output = `position is [${obj.x},${obj.y}] and car is facing ${obj.facing}`;
+      fs.writeFile('./output.text', output, 'utf8', err => {
+        if (err) throw err;
+        console.log('Output has been saved!');
+      });
+      continue;
     }
   }
-})
+});
 
 // check if a command string is a PLACE command
-function isPlaceCommand (place) {
+function isPlaceCommand(place) {
   if (place.startsWith('PLACE')) {
-    const [x, y, facing, shouldNotExist] = place.split(' ')[1].split(',')
-    const xInt = parseInt(x, 10)
-    const yInt = parseInt(y, 10)
-    if (Number.isInteger(xInt) && Number.isInteger(yInt) &&
-      xInt < 5 && yInt < 5 && shouldNotExist === undefined &&
+    const [x, y, facing, shouldNotExist] = place.split(' ')[1].split(',');
+    const xInt = parseInt(x, 10);
+    const yInt = parseInt(y, 10);
+    if (
+      Number.isInteger(xInt) &&
+      Number.isInteger(yInt) &&
+      xInt < 5 &&
+      yInt < 5 &&
+      shouldNotExist === undefined &&
       ['NORTH', 'WEST', 'EAST', 'SOUTH'].includes(facing)
     ) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
 
-function turnDirection (direction, obj) {
-  const { facing } = obj
+function turnDirection(direction, obj) {
+  const { facing } = obj;
   if (direction === 'LEFT') {
     if (facing === 'NORTH') {
-      obj.facing = 'WEST'
+      obj.facing = 'WEST';
     } else if (facing === 'WEST') {
-      obj.facing = 'SOUTH'
+      obj.facing = 'SOUTH';
     } else if (facing === 'SOUTH') {
-      obj.facing = 'EAST'
+      obj.facing = 'EAST';
     } else if (facing === 'EAST') {
-      obj.facing = 'NORTH'
+      obj.facing = 'NORTH';
     }
   } else if (direction === 'RIGHT') {
     if (facing === 'NORTH') {
-      obj.facing = 'EAST'
+      obj.facing = 'EAST';
     } else if (facing === 'EAST') {
-      obj.facing = 'SOUTH'
+      obj.facing = 'SOUTH';
     } else if (facing === 'SOUTH') {
-      obj.facing = 'WEST'
+      obj.facing = 'WEST';
     } else if (facing === 'WEST') {
-      obj.facing = 'NORTH'
+      obj.facing = 'NORTH';
     }
   }
 
-  return obj
+  return obj;
 }
 
-function movePosition (obj) {
-  const { x, y, facing } = obj
+function movePosition(obj) {
+  const { x, y, facing } = obj;
   if (facing === 'NORTH') {
     if (y < 4) {
-      obj.y = y + 1
+      obj.y = y + 1;
     }
   } else if (facing === 'EAST') {
     if (x < 4) {
-      obj.x = x + 1
+      obj.x = x + 1;
     }
   } else if (facing === 'WEST') {
     if (x > 0) {
-      obj.x = x - 1
+      obj.x = x - 1;
     }
   } else if (facing === 'SOUTH') {
     if (y > 0) {
-      obj.y = y - 1
+      obj.y = y - 1;
     }
   }
 
-  return obj
+  return obj;
 }
