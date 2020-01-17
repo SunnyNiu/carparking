@@ -32,33 +32,6 @@ export function isReportCommand(command) {
   return command === 'REPORT';
 }
 
-export function turnDirection(direction, obj) {
-  const { facing } = obj;
-  if (direction === 'LEFT') {
-    if (facing === 'NORTH') {
-      obj.facing = 'WEST';
-    } else if (facing === 'WEST') {
-      obj.facing = 'SOUTH';
-    } else if (facing === 'SOUTH') {
-      obj.facing = 'EAST';
-    } else if (facing === 'EAST') {
-      obj.facing = 'NORTH';
-    }
-  } else if (direction === 'RIGHT') {
-    if (facing === 'NORTH') {
-      obj.facing = 'EAST';
-    } else if (facing === 'EAST') {
-      obj.facing = 'SOUTH';
-    } else if (facing === 'SOUTH') {
-      obj.facing = 'WEST';
-    } else if (facing === 'WEST') {
-      obj.facing = 'NORTH';
-    }
-  }
-
-  return obj;
-}
-
 export function movePosition(obj) {
   const { x, y, facing } = obj;
   if (facing === 'NORTH') {

@@ -1,4 +1,4 @@
-import { TurnCommand, ReportCommand } from './commands';
+import { TurnCommand, ReportCommand, MoveCommand } from './commands';
 
 describe('TurnCommand', () => {
   it('tryParse LEFT command', () => {
@@ -109,6 +109,76 @@ describe('ReportCommand', () => {
     const spy = jest.spyOn(global.console, 'log');
     const actual = command.execute({ x: 1, y: 1, facing: 'NORTH' });
     expect(spy).toBeCalledWith('1,1,NORTH');
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('MoveCommand', () => {
+  it('tryParse MOVE command', () => {
+    const expected = new MoveCommand('MOVE');
+    const actual = MoveCommand.tryParse('MOVE');
+    expect(actual).toEqual(expected);
+  });
+
+  it('tryParse will return null with wrong command', () => {
+    const expected = null;
+    const actual = MoveCommand.tryParse('DOWN');
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will execute and the new position is 1,2 when it was at 1,1,NORTH', () => {
+    const expected = { x: 1, y: 2, facing: 'NORTH' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 1, y: 1, facing: 'NORTH' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will execute and the new position is 1,0 when it was at 1,1,SOUTH', () => {
+    const expected = { x: 1, y: 0, facing: 'SOUTH' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 1, y: 1, facing: 'SOUTH' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will execute and the new position is 2,1 when it was at 1,1,EAST', () => {
+    const expected = { x: 2, y: 1, facing: 'EAST' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 1, y: 1, facing: 'EAST' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will execute and the new position is 0,1 when it was at 1,1,WEST', () => {
+    const expected = { x: 0, y: 1, facing: 'WEST' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 1, y: 1, facing: 'WEST' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will not execute when it was at 0,0,WEST', () => {
+    const expected = { x: 0, y: 0, facing: 'WEST' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 0, y: 0, facing: 'WEST' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will not execute when it was at 0,0,SOUTH', () => {
+    const expected = { x: 0, y: 0, facing: 'SOUTH' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 0, y: 0, facing: 'SOUTH' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will not execute when it was at 5,5,EAST', () => {
+    const expected = { x: 5, y: 5, facing: 'EAST' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 5, y: 5, facing: 'EAST' });
+    expect(actual).toEqual(expected);
+  });
+
+  it('MOVE command will not execute when it was at 5,5,NORTH', () => {
+    const expected = { x: 5, y: 5, facing: 'NORTH' };
+    const command = new MoveCommand();
+    const actual = command.execute({ x: 5, y: 5, facing: 'NORTH' });
     expect(actual).toEqual(expected);
   });
 });
