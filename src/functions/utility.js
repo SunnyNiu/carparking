@@ -1,47 +1,4 @@
 const fs = require('fs');
-fs.readFile('./fs.txt', 'utf8', (err, data) => {
-  if (err) throw err;
-  const array = data.split('\n');
-
-  let obj = {};
-
-  for (let i = 0; i < array.length; i++) {
-    if (
-      array[i].includes('PLACE') &&
-      array[i].split(' ').indexOf('PLACE') === 0
-    ) {
-      if (isPlaceCommand(array[i])) {
-        const [x, y, facing] = array[i].split(' ')[1].split(',');
-
-        obj = {
-          x: parseInt(x, 10),
-          y: parseInt(y, 10),
-          facing: facing,
-        };
-      }
-      continue;
-    }
-
-    if (array[i] === 'MOVE') {
-      obj = movePosition(obj);
-      continue;
-    }
-
-    if (array[i] === 'LEFT' || array[i] === 'RIGHT') {
-      obj = turnDirection(array[i], obj);
-      continue;
-    }
-
-    if (array[i] === 'REPORT') {
-      const output = `position is [${obj.x},${obj.y}] and car is facing ${obj.facing}`;
-      fs.writeFile('./output.text', output, 'utf8', err => {
-        if (err) throw err;
-        console.log('Output has been saved!');
-      });
-      continue;
-    }
-  }
-});
 
 // check if a command string is a PLACE command
 function isPlaceCommand(place) {
@@ -59,6 +16,27 @@ function isPlaceCommand(place) {
     ) {
       return true;
     }
+  }
+  return false;
+}
+
+function isTurnCommand(command) {
+  if (command === 'LEFT' || command === 'RIGHT') {
+    return true;
+  }
+  return false;
+}
+
+function isMoveCommand(command) {
+  if (command === 'MOVE') {
+    return true;
+  }
+  return false;
+}
+
+function isReportCommand(command) {
+  if (command === 'REPORT') {
+    return true;
   }
   return false;
 }
@@ -112,3 +90,42 @@ function movePosition(obj) {
 
   return obj;
 }
+fs.readFile('./fs.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  const array = data.split('\n');
+
+  let obj = {};
+
+  for (let i = 0; i < array.length; i++) {
+    if (
+      array[i].includes('PLACE') &&
+      array[i].split(' ').indexOf('PLACE') === 0
+    ) {
+      if (isPlaceCommand(array[i])) {
+        const [x, y, facing] = array[i].split(' ')[1].split(',');
+
+        obj = {
+          x: parseInt(x, 10),
+          y: parseInt(y, 10),
+          facing,
+        };
+      }
+    }
+
+    if (isTurnCommand(array[i])) {
+      obj = movePosition(obj);
+    }
+
+    if (isMoveCommand(array[i])) {
+      obj = turnDirection(array[i], obj);
+    }
+
+    if (isReportCommand(array[i])) {
+      const output = `position is [${obj.x},${obj.y}] and car is facing ${obj.facing}`;
+      fs.writeFile('./output.text', output, 'utf8', error => {
+        if (error) throw error;
+        console.log('Output has been saved!');
+      });
+    }
+  }
+});
