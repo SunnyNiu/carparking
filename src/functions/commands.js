@@ -90,3 +90,38 @@ export class MoveCommand {
     return { x: x1, y: y1, facing };
   }
 }
+
+export class PlaceCommand {
+  static tryParse(commandString) {
+    if (commandString.startsWith('PLACE')) {
+      const [x, y, facing, shouldNotExist] = commandString
+        .split(' ')[1]
+        .split(',');
+      const xInt = parseInt(x, 10);
+      const yInt = parseInt(y, 10);
+      if (
+        Number.isInteger(xInt) &&
+        Number.isInteger(yInt) &&
+        xInt < 5 &&
+        xInt >= 0 &&
+        yInt < 5 &&
+        yInt >= 0 &&
+        shouldNotExist === undefined &&
+        ['NORTH', 'WEST', 'EAST', 'SOUTH'].includes(facing)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  execute(commandString) {
+    const [x, y, facing] = commandString.split(' ')[1].split(',');
+
+    return {
+      x: parseInt(x, 10),
+      y: parseInt(y, 10),
+      facing,
+    };
+  }
+}

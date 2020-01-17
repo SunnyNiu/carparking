@@ -32,29 +32,6 @@ export function isReportCommand(command) {
   return command === 'REPORT';
 }
 
-export function movePosition(obj) {
-  const { x, y, facing } = obj;
-  if (facing === 'NORTH') {
-    if (y < 4) {
-      obj.y = y + 1;
-    }
-  } else if (facing === 'EAST') {
-    if (x < 4) {
-      obj.x = x + 1;
-    }
-  } else if (facing === 'WEST') {
-    if (x > 0) {
-      obj.x = x - 1;
-    }
-  } else if (facing === 'SOUTH') {
-    if (y > 0) {
-      obj.y = y - 1;
-    }
-  }
-
-  return obj;
-}
-
 fs.readFile('src/functions/fs.txt', 'utf8', (err, data) => {
   if (err) throw err;
   const array = data.split('\n');
