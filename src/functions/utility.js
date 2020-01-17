@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // check if a command string is a PLACE command
-function isPlaceCommand(place) {
+export function isPlaceCommand(place) {
   if (place.startsWith('PLACE')) {
     const [x, y, facing, shouldNotExist] = place.split(' ')[1].split(',');
     const xInt = parseInt(x, 10);
@@ -20,28 +20,28 @@ function isPlaceCommand(place) {
   return false;
 }
 
-function isTurnCommand(command) {
+export function isTurnCommand(command) {
   if (command === 'LEFT' || command === 'RIGHT') {
     return true;
   }
   return false;
 }
 
-function isMoveCommand(command) {
+export function isMoveCommand(command) {
   if (command === 'MOVE') {
     return true;
   }
   return false;
 }
 
-function isReportCommand(command) {
+export function isReportCommand(command) {
   if (command === 'REPORT') {
     return true;
   }
   return false;
 }
 
-function turnDirection(direction, obj) {
+export function turnDirection(direction, obj) {
   const { facing } = obj;
   if (direction === 'LEFT') {
     if (facing === 'NORTH') {
@@ -68,7 +68,7 @@ function turnDirection(direction, obj) {
   return obj;
 }
 
-function movePosition(obj) {
+export function movePosition(obj) {
   const { x, y, facing } = obj;
   if (facing === 'NORTH') {
     if (y < 4) {
