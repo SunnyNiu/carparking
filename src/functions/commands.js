@@ -40,10 +40,6 @@ export class TurnCommand {
 }
 
 export class ReportCommand {
-  constructor(report) {
-    this.report = report;
-  }
-
   static tryParse(commandString) {
     if (commandString !== 'REPORT') {
       return null;
@@ -69,22 +65,32 @@ export class MoveCommand {
   execute({ x, y, facing }) {
     let x1 = x;
     let y1 = y;
-    if (facing === 'NORTH') {
-      if (y < 4) {
-        y1 += 1;
+    switch (facing) {
+      case 'NORTH': {
+        if (y < 4) {
+          y1 += 1;
+        }
+        break;
       }
-    } else if (facing === 'EAST') {
-      if (x < 4) {
-        x1 += 1;
+      case 'EAST': {
+        if (x < 4) {
+          x1 += 1;
+        }
+        break;
       }
-    } else if (facing === 'WEST') {
-      if (x > 0) {
-        x1 -= 1;
+      case 'WEST': {
+        if (x > 0) {
+          x1 -= 1;
+        }
+        break;
       }
-    } else if (facing === 'SOUTH') {
-      if (y > 0) {
-        y1 -= 1;
+      case 'SOUTH': {
+        if (y > 0) {
+          y1 -= 1;
+        }
+        break;
       }
+      default:
     }
 
     return { x: x1, y: y1, facing };
