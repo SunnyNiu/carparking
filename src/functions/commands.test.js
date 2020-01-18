@@ -79,20 +79,6 @@ describe('TurnCommand', () => {
     const actual = command.execute({ x: 1, y: 1, facing: 'WEST' });
     expect(actual).toEqual(expected);
   });
-
-  it('RIGHT command will turn undefined facing when facing to no existing direction', () => {
-    const command = new TurnCommand('RIGHT');
-    const expected = { x: 1, y: 1, facing: undefined };
-    const actual = command.execute({ x: 1, y: 1, facing: 'SKY' });
-    expect(actual).toEqual(expected);
-  });
-
-  it('LEFT command will turn undefined facing when facing to no existing direction', () => {
-    const command = new TurnCommand('LEFT');
-    const expected = { x: 1, y: 1, facing: undefined };
-    const actual = command.execute({ x: 1, y: 1, facing: 'SKY' });
-    expect(actual).toEqual(expected);
-  });
 });
 
 describe('ReportCommand', () => {

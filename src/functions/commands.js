@@ -1,4 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
+const unit = 5;
+
 export class TurnCommand {
   constructor(direction) {
     this.direction = direction;
@@ -12,30 +14,11 @@ export class TurnCommand {
   }
 
   execute({ x, y, facing }) {
-    let updatedFacing;
-    if (this.direction === 'LEFT') {
-      if (facing === 'NORTH') {
-        updatedFacing = 'WEST';
-      } else if (facing === 'WEST') {
-        updatedFacing = 'SOUTH';
-      } else if (facing === 'SOUTH') {
-        updatedFacing = 'EAST';
-      } else if (facing === 'EAST') {
-        updatedFacing = 'NORTH';
-      }
-    } else if (this.direction === 'RIGHT') {
-      if (facing === 'NORTH') {
-        updatedFacing = 'EAST';
-      } else if (facing === 'EAST') {
-        updatedFacing = 'SOUTH';
-      } else if (facing === 'SOUTH') {
-        updatedFacing = 'WEST';
-      } else if (facing === 'WEST') {
-        updatedFacing = 'NORTH';
-      }
-    }
-
-    return { x, y, facing: updatedFacing };
+    const facings = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
+    const index = facings.indexOf(facing);
+    let nextIndex = index + (this.direction === 'RIGHT' ? 1 : -1);
+    nextIndex = (nextIndex + facings.length) % facings.length;
+    return { x, y, facing: facings[nextIndex] };
   }
 }
 
@@ -67,13 +50,13 @@ export class MoveCommand {
     let y1 = y;
     switch (facing) {
       case 'NORTH': {
-        if (y < 4) {
+        if (y < unit - 1) {
           y1 += 1;
         }
         break;
       }
       case 'EAST': {
-        if (x < 4) {
+        if (x < unit - 1) {
           x1 += 1;
         }
         break;
@@ -108,9 +91,9 @@ export class PlaceCommand {
       if (
         Number.isInteger(xInt) &&
         Number.isInteger(yInt) &&
-        xInt < 5 &&
+        xInt < unit &&
         xInt >= 0 &&
-        yInt < 5 &&
+        yInt < unit &&
         yInt >= 0 &&
         shouldNotExist === undefined &&
         ['NORTH', 'WEST', 'EAST', 'SOUTH'].includes(facing)
