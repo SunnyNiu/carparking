@@ -15,7 +15,7 @@ fs.readFile('src/functions/fs.txt', 'utf8', (err, data) => {
 
   for (let i = 0; i < array.length; i++) {
     if (PlaceCommand.tryParse(array[i])) {
-      const command = new PlaceCommand();
+      const command = new PlaceCommand(array[i]);
       obj = command.execute(array[i]);
     }
 
