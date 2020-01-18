@@ -81,6 +81,15 @@ export class MoveCommand {
 }
 
 export class PlaceCommand {
+  constructor(commandString) {
+    const [x, y, facing] = commandString.split(' ')[1].split(',');
+    this.obj = {
+      x: parseInt(x, 10),
+      y: parseInt(y, 10),
+      facing,
+    };
+  }
+
   static tryParse(commandString) {
     if (commandString.startsWith('PLACE')) {
       const [x, y, facing, shouldNotExist] = commandString
@@ -98,19 +107,13 @@ export class PlaceCommand {
         shouldNotExist === undefined &&
         ['NORTH', 'WEST', 'EAST', 'SOUTH'].includes(facing)
       ) {
-        return true;
+        return new PlaceCommand(commandString);
       }
     }
-    return false;
+    return null;
   }
 
-  execute(commandString) {
-    const [x, y, facing] = commandString.split(' ')[1].split(',');
-
-    return {
-      x: parseInt(x, 10),
-      y: parseInt(y, 10),
-      facing,
-    };
+  execute() {
+    return this.obj;
   }
 }

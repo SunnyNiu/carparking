@@ -176,61 +176,61 @@ describe('MoveCommand', () => {
 
 describe('PlaceCommand', () => {
   it('tryParse PLACE command', () => {
-    const expected = true;
+    const expected = new PlaceCommand('PLACE 1,1,NORTH');
     const actual = PlaceCommand.tryParse('PLACE 1,1,NORTH');
-    expect(actual).toBe(expected);
+    expect(actual).toEqual(expected);
   });
 
   it('tryParse PLACE command without start with PLACE', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('M PLACE 1,1,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position which type of x is string instead of number', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE s,1,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position which type of y is string instead of number', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE 1,x,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position with no-exist facing', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE 1,1,FOR');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position with position x > 5 ', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE 1,6,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position with position x < 0 ', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE -3,1,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position with position y > 5 ', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE 1,6,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position with position y < 0 ', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE 1,-2,NORTH');
     expect(actual).toBe(expected);
   });
 
   it('tryParse PLACE command with position with unneeded string after facing ', () => {
-    const expected = false;
+    const expected = null;
     const actual = PlaceCommand.tryParse('PLACE 1,1,NORTH,WEST');
     expect(actual).toBe(expected);
   });
