@@ -18,7 +18,7 @@ export class TurnCommand {
     const index = facings.indexOf(facing);
     let nextIndex = index + (this.direction === 'RIGHT' ? 1 : -1);
     nextIndex = (nextIndex + facings.length) % facings.length;
-    return { x, y, facing: facings[nextIndex] };
+    return [{ x, y, facing: facings[nextIndex] }, null];
   }
 }
 
@@ -33,7 +33,7 @@ export class ReportCommand {
   execute({ x, y, facing }) {
     const result = `${x},${y},${facing}`;
     console.log(result);
-    return { x, y, facing };
+    return [{ x, y, facing }, result];
   }
 }
 
@@ -76,7 +76,7 @@ export class MoveCommand {
       default:
     }
 
-    return { x: x1, y: y1, facing };
+    return [{ x: x1, y: y1, facing }, null];
   }
 }
 
@@ -114,6 +114,6 @@ export class PlaceCommand {
   }
 
   execute() {
-    return this.obj;
+    return [this.obj, null];
   }
 }
