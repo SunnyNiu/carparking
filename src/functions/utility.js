@@ -15,13 +15,11 @@ fs.readFile('src/functions/fs.txt', 'utf8', (err, data) => {
 
   const commands = [PlaceCommand, TurnCommand, MoveCommand, ReportCommand];
 
-  console.log(
-    array
-      .flatMap(str => commands.map(cmd => cmd.tryParse(str)))
-      .filter(x => x)
-      .reduce(
-        (acc, currentCommand) => currentCommand.execute(acc),
-        initialLocation
-      )
-  );
+  array
+    .flatMap(str => commands.map(cmd => cmd.tryParse(str)))
+    .filter(x => x)
+    .reduce(
+      (acc, currentCommand) => currentCommand.execute(acc),
+      initialLocation
+    );
 });
