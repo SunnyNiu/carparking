@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-const unit = 5;
+export const unit = 5;
 
 export class TurnCommand {
   constructor(direction) {

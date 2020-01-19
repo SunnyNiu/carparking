@@ -1,9 +1,9 @@
 function createMatrix() {
   const matrix = [];
-  for (let i = 0; i < 5; i++) {
+  for (let y = 0; y < 5; y++) {
     const arr = [];
-    for (let j = 0; j < 5; j++) {
-      arr[(i, j)] = false;
+    for (let x = 0; x < 5; x++) {
+      arr[x] = [x, y];
     }
     matrix.push(arr);
   }
