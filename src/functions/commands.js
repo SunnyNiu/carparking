@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-export const unit = 5;
+export const dimension = 5;
 
 export class TurnCommand {
   constructor(direction) {
@@ -50,13 +50,13 @@ export class MoveCommand {
     let y1 = y;
     switch (facing) {
       case 'NORTH': {
-        if (y < unit - 1) {
+        if (y < dimension - 1) {
           y1 += 1;
         }
         break;
       }
       case 'EAST': {
-        if (x < unit - 1) {
+        if (x < dimension - 1) {
           x1 += 1;
         }
         break;
@@ -100,9 +100,9 @@ export class PlaceCommand {
       if (
         Number.isInteger(xInt) &&
         Number.isInteger(yInt) &&
-        xInt < unit &&
+        xInt < dimension &&
         xInt >= 0 &&
-        yInt < unit &&
+        yInt < dimension &&
         yInt >= 0 &&
         shouldNotExist === undefined &&
         ['NORTH', 'WEST', 'EAST', 'SOUTH'].includes(facing)
