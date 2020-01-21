@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Carpark from './Carpark';
-import Input from './Input';
+// import Carpark from './Carpark';
+// import Input from './Input';
 // import Output from './Output';
 
 const AppContainer = styled.div`
@@ -18,8 +18,8 @@ const AppContainer = styled.div`
 
 const App = () => (
   <AppContainer>
-    <Carpark />
-    <Input />
+    {/* <Carpark />
+    <Input /> */}
     {/* <Output /> */}
   </AppContainer>
 );
