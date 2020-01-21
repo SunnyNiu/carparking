@@ -18,8 +18,11 @@ fs.readFile('src/functions/fs.txt', 'utf8', (err, data) => {
   array
     .flatMap(str => commands.map(cmd => cmd.tryParse(str)))
     .filter(x => x)
-    .reduce(
-      (acc, currentCommand) => currentCommand.execute(acc),
-      initialLocation
-    );
+    .reduce((acc, currentCommand) => {
+      const [location, output] = currentCommand.execute(acc);
+      if (output) {
+        console.log(output);
+      }
+      return location;
+    }, initialLocation);
 });
