@@ -1,10 +1,11 @@
 import PlaceCommand from './placeCommands';
 import MoveCommand from './moveCommands';
 import TurnCommand from './turnCommands';
+import ReportCommand from './reportCommands';
 
 const fs = require('fs');
 
-fs.readFile('./fs.txt', 'utf8', (err, data) => {
+fs.readFile('src/functions/fs.txt', 'utf8', (err, data) => {
   if (err) throw err;
   const array = data.split('\n');
 
@@ -19,19 +20,19 @@ fs.readFile('./fs.txt', 'utf8', (err, data) => {
 
     // MoveCommand
     if (MoveCommand.tryparse(array[i])) {
-      const command = new MoveCommand(array[i]);
+      const command = new MoveCommand(car[0]);
       car = command.execute(array[i]);
     }
 
     // TurnCommand
     if (TurnCommand.tryparse(array[i])) {
-      const command = new TurnCommand(array[i], car[0]);
+      const command = new TurnCommand(car[0]);
       car = command.execute(array[i]);
     }
 
     if (array[i] === 'REPORT') {
-      console.log('report');
-      console.log(car.obj);
+      const command = new ReportCommand(car[0]);
+      command.execute();
     }
   }
 });
