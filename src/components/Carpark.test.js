@@ -29,16 +29,14 @@ describe('Carpark', () => {
     expect(wrapper.text()).toMatch('👈');
   });
 
-  // '👈' does not recognised if not using text
-  // it('it render car at the correct location', () => {
-  //   expect(
-  //     wrapper
-  //       .find('CarparkCell')
-  //       .at(0)
-  //       .find('👈')
-  //       .exists()
-  //   ).toBe(true);
-  // });
+  it('it render car at the correct location', () => {
+    expect(
+      wrapper
+        .find('CarparkCell')
+        .at(0)
+        .text()
+    ).toEqual('👈');
+  });
 
   it('Carpark snapShot', () => {
     expect(wrapper).toMatchSnapshot();
