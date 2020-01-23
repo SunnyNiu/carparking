@@ -34,15 +34,7 @@ export default class PlaceCommand {
     return null;
   }
 
-  execute(commandString) {
-    const commandHalf = commandString.split(' ')[1].split(',');
-    return [
-      {
-        x: parseInt(commandHalf[0], 10),
-        y: parseInt(commandHalf[1], 10),
-        facing: commandHalf[2],
-      },
-      null,
-    ];
+  execute() {
+    return [this.obj, null];
   }
 }

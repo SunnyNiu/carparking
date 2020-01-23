@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Input snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Input)>
+    <Input
+      dispatch={[Function]}
+    >
+      <div>
+        <label>
+          input commands:
+        </label>
+        <textarea
+          defaultValue="PLACE 1,2,EAST
+MOVE
+MOVE
+LEFT
+MOVE
+REPORT"
+          style={
+            Object {
+              "maxHeight": "110px",
+              "minHeight": "80px",
+            }
+          }
+        />
+        <button
+          onClick={[Function]}
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </Input>
+  </Connect(Input)>
+</Provider>
+`;

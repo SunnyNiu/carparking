@@ -1,29 +1,25 @@
 import { facings } from './const';
 
 export default class TurnCommand {
-  constructor(obj) {
-    this.obj = obj;
+  constructor(direction) {
+    this.direction = direction;
   }
 
-  static tryparse(commandString, obj) {
+  static tryparse(commandString) {
     if (commandString === 'LEFT' || commandString === 'RIGHT') {
-      return new TurnCommand(obj);
+      return new TurnCommand(commandString);
     }
     return null;
   }
 
-  execute(commandString) {
+  execute({ x, y, facing }) {
     let index = 0;
-    if (commandString === 'LEFT') {
-      index =
-        (facings.indexOf(this.obj.facing) - 1 + facings.length) %
-        facings.length;
+    if (this.direction === 'LEFT') {
+      index = (facings.indexOf(facing) - 1 + facings.length) % facings.length;
     } else {
-      index =
-        (facings.indexOf(this.obj.facing) + 1 + facings.length) %
-        facings.length;
+      index = (facings.indexOf(facing) + 1 + facings.length) % facings.length;
     }
 
-    return [{ x: this.obj.x, y: this.obj.y, facing: facings[index] }, null];
+    return [{ x, y, facing: facings[index] }, null];
   }
 }

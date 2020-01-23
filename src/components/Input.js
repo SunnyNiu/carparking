@@ -2,10 +2,6 @@ import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { DEFAULT_COMMANDS } from '../functions/const';
-import PlaceCommand from '../functions/placeCommands';
-import MoveCommand from '../functions/moveCommands';
-import TurnCommand from '../functions/turnCommands';
-import ReportCommand from '../functions/reportCommands';
 import { updateCarPositionCreator } from '../reducers/actions';
 
 const Input = ({ dispatch }) => {
@@ -17,36 +13,7 @@ const Input = ({ dispatch }) => {
 
   const executeCommand = () => {
     const array = inputEl.current.value.trim().split('\n');
-    let car = [];
-
-    for (let i = 0; i < array.length; i++) {
-      // PlaceCommand
-      if (PlaceCommand.tryparse(array[i])) {
-        const command = new PlaceCommand(array[i]);
-        car = command.execute(array[i]);
-        dispatch(updateCarPositionCreator(car));
-      }
-
-      // MoveCommand
-      if (MoveCommand.tryparse(array[i])) {
-        const command = new MoveCommand(car[0]);
-        car = command.execute(array[i]);
-        dispatch(updateCarPositionCreator(car));
-      }
-
-      // TurnCommand
-      if (TurnCommand.tryparse(array[i])) {
-        const command = new TurnCommand(car[0]);
-        car = command.execute(array[i]);
-        dispatch(updateCarPositionCreator(car));
-      }
-
-      if (array[i] === 'REPORT') {
-        const command = new ReportCommand(car[0]);
-        car = command.execute();
-        dispatch(updateCarPositionCreator(car));
-      }
-    }
+    dispatch(updateCarPositionCreator(array));
   };
   return (
     <div>

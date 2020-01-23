@@ -1,18 +1,14 @@
 export default class ReportCommand {
-  constructor(obj) {
-    this.obj = obj;
-  }
-
-  static tryparse(commandString, obj) {
+  static tryparse(commandString) {
     if (commandString === 'REPORT') {
-      return new ReportCommand(obj);
+      return new ReportCommand(commandString);
     }
     return null;
   }
 
-  execute() {
-    const output = `${this.obj.x},${this.obj.y},${this.obj.facing}`;
+  execute({ x, y, facing }) {
+    const output = `${x},${y},${facing}`;
     console.log(output);
-    return [this.obj, output];
+    return [{ x, y, facing }, output];
   }
 }

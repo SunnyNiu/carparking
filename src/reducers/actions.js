@@ -1,7 +1,6 @@
-export const updateCarPositionCreator = car => {
+export const updateCarPositionCreator = commands => {
   return {
     type: 'UPDATE_LOCATION',
-    location: car[0],
-    output: car[1],
+    commands,
   };
 };

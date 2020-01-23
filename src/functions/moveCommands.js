@@ -1,8 +1,4 @@
 export default class MoveCommand {
-  constructor(obj) {
-    this.obj = obj;
-  }
-
   static tryparse(commandString) {
     if (commandString === 'MOVE') {
       return new MoveCommand();
@@ -10,8 +6,8 @@ export default class MoveCommand {
     return null;
   }
 
-  execute() {
-    let { x, y, facing } = this.obj;
+  execute(obj) {
+    let { x, y, facing } = obj;
     x = parseInt(x, 10);
     y = parseInt(y, 10);
     switch (facing) {
