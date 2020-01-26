@@ -1,55 +1,24 @@
+import PlaceCommand from './placeCommand';
+import MoveCommand from './moveCommand';
+
 const fs = require('fs');
 
 fs.readFile('./src/functions/fs.txt', 'utf8', (err, data) => {
   if (err) throw err;
   const commands = data.split('\n');
-  const obj = {};
+  let obj = {};
   const facings = ['SOUTH', 'EAST', 'NORTH', 'WEST'];
   for (let i = 0; i < commands.length; i++) {
     const command = commands[i];
     // Place command
-    if (command.startsWith('PLACE')) {
-      const separateTwoParts = command.split(' ');
-      let secondPart = [];
-      if (separateTwoParts.length > 1) {
-        secondPart = separateTwoParts[1].split(',');
-      }
-
-      if (
-        secondPart.length === 3 &&
-        secondPart[0] < 5 &&
-        secondPart[0] >= 0 &&
-        secondPart[1] < 5 &&
-        secondPart[1] >= 0 &&
-        facings.includes(secondPart[2])
-      ) {
-        console.log('It is Place command', command);
-        obj.x = parseInt(secondPart[0]);
-        obj.y = parseInt(secondPart[1]);
-        obj.facing = secondPart[2];
-      }
-      console.log('place command,', obj);
+    if (PlaceCommand.tryParse(command)) {
+      const c = new PlaceCommand(command);
+      obj = c.executeCommand()[0];
     }
     // Move command
-    if (command === 'MOVE') {
-      console.log('It is Move command,', command);
-      switch (obj.facing) {
-        case 'EAST':
-          obj.x += 1;
-          break;
-        case 'SOUTH':
-          obj.y -= 1;
-          break;
-        case 'WEST':
-          obj.x -= 1;
-          break;
-        case 'NORTH':
-          obj.y += 1;
-          break;
-        default:
-          break;
-      }
-      console.log('move command,', obj);
+    if (MoveCommand.tryParse(command)) {
+      const c = new MoveCommand(command);
+      obj = c.executeCommand(obj)[0];
     }
     // Turn command
     if (command === 'LEFT' || command === 'RIGHT') {
