@@ -1,6 +1,7 @@
 import PlaceCommand from './placeCommand';
 import MoveCommand from './moveCommand';
 import TurnCommand from './turnCommand';
+import ReportCommand from './reportCommand';
 
 const fs = require('fs');
 
@@ -28,9 +29,10 @@ fs.readFile('./src/functions/fs.txt', 'utf8', (err, data) => {
     }
 
     // Report command
-    if (command === 'REPORT') {
-      console.log('It is Report command,', command);
-      console.log('obj', obj);
+    if (ReportCommand.tryParse(command)) {
+      const c = new ReportCommand(command);
+      [obj, result] = c.executeCommand(obj);
+      console.log('report:', result);
     }
   }
 });
