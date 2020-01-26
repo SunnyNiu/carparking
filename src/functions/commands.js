@@ -1,5 +1,6 @@
 import PlaceCommand from './placeCommand';
 import MoveCommand from './moveCommand';
+import TurnCommand from './turnCommand';
 
 const fs = require('fs');
 
@@ -7,31 +8,25 @@ fs.readFile('./src/functions/fs.txt', 'utf8', (err, data) => {
   if (err) throw err;
   const commands = data.split('\n');
   let obj = {};
-  const facings = ['SOUTH', 'EAST', 'NORTH', 'WEST'];
+  let result = '';
   for (let i = 0; i < commands.length; i++) {
     const command = commands[i];
     // Place command
     if (PlaceCommand.tryParse(command)) {
       const c = new PlaceCommand(command);
-      obj = c.executeCommand()[0];
+      [obj, result] = c.executeCommand();
     }
     // Move command
     if (MoveCommand.tryParse(command)) {
       const c = new MoveCommand(command);
-      obj = c.executeCommand(obj)[0];
+      [obj, result] = c.executeCommand(obj);
     }
     // Turn command
-    if (command === 'LEFT' || command === 'RIGHT') {
-      console.log('It is Turn command,', command);
-      const { length } = facings;
-      const index = facings.indexOf(obj.facing);
-      if (command === 'LEFT') {
-        obj.facing = facings[(index + 1) % length];
-      } else {
-        obj.facing = facings[(index + length - 1) % length];
-      }
-      console.log('turn command,', obj);
+    if (TurnCommand.tryParse(command)) {
+      const c = new TurnCommand(command);
+      [obj, result] = c.executeCommand(obj);
     }
+
     // Report command
     if (command === 'REPORT') {
       console.log('It is Report command,', command);
