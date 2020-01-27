@@ -23,7 +23,7 @@ describe('<Input/> component', () => {
       <Input />
     </Provider>
   );
-  it('Carpark snapshot', () => {
+  it('Input snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
