@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Output/> component Output snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Output)>
+    <Output
+      dispatch={[Function]}
+      output="0,4,NORTH"
+    >
+      <div>
+        <label>
+          Report:
+        </label>
+        <label>
+          0,4,NORTH
+        </label>
+      </div>
+    </Output>
+  </Connect(Output)>
+</Provider>
+`;
