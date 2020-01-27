@@ -27,8 +27,8 @@ export default class PlaceCommand {
       ) {
         return new PlaceCommand(commandString);
       }
-      return null;
     }
+    return null;
   }
 
   executeCommand() {
