@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Carpark from './Carpark';
-// import Input from './Input';
-// import Output from './Output';
+import Input from './Input';
+import Output from './Output';
 
 const AppContainer = styled.div`
   width: fit-content;
@@ -19,9 +19,8 @@ const AppContainer = styled.div`
 const App = () => (
   <AppContainer>
     <Carpark />
-    {/* 
     <Input />
-    <Output /> */}
+    <Output />
   </AppContainer>
 );
 
