@@ -7,7 +7,8 @@ export default class MoveCommand {
   }
 
   executeCommand(obj) {
-    let { x, y, facing } = obj;
+    let { x, y } = obj;
+    const { facing } = obj;
     x = parseInt(x, 10);
     y = parseInt(y, 10);
     switch (facing) {

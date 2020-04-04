@@ -12,7 +12,7 @@ const Output = ({ output }) => {
 };
 
 Output.propTypes = {
-  output: PropTypes.string,
+  output: PropTypes.string.isRequired,
 };
 const mapStateToProps = state => {
   return {

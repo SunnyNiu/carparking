@@ -14,7 +14,8 @@ export default class TurnCommand {
 
   executeCommand(obj) {
     const { length } = facings;
-    let { x, y, facing } = obj;
+    let { facing } = obj;
+    const { x, y } = obj;
     const index = facings.indexOf(facing);
     if (this.direction === 'LEFT') {
       facing = facings[(index + 1) % length];
