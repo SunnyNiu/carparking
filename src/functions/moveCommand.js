@@ -6,6 +6,7 @@ export default class MoveCommand {
     return null;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   executeCommand(obj) {
     let { x, y } = obj;
     const { facing } = obj;
