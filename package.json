@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "This application is a simulation of a robot operated bus moving in a carpark",
   "main": "src/index.js",
-  "repository": "https://github.com/ouchxp/carpark-simulator",
-  "author": "Nan Wu",
+  "repository": "https://github.com/SunnyNiu/carparking",
+  "author": "Sunny Niu",
   "license": "MIT",
   "scripts": {
     "build": "webpack .",
