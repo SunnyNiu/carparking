@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Input/> component Carpark snapshot 1`] = `
+exports[`<Input/> component Input snapshot 1`] = `
 <Provider
   store={
     Object {

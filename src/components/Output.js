@@ -12,8 +12,13 @@ const Output = ({ output }) => {
 };
 
 Output.propTypes = {
-  output: PropTypes.string.isRequired,
+  output: PropTypes.string,
 };
+
+Output.defaultProps = {
+  output: null,
+};
+
 const mapStateToProps = state => {
   return {
     output: state.app.output,

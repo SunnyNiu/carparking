@@ -1,6 +1,11 @@
-export const updateCarLocationCreator = commands => {
+export const actionTypes = {
+  UPDATE_LOCATION: 'UPDATE_LOCATION',
+};
+
+export const updateCarLocation = (location, output) => {
   return {
-    type: 'UPDATE_LOCATION',
-    commands,
+    type: actionTypes.UPDATE_LOCATION,
+    location,
+    output,
   };
 };

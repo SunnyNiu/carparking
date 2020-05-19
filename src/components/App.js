@@ -10,7 +10,7 @@ const AppContainer = styled.div`
   font-family: monospace;
   * + label {
     margin-left: 2px;
-    margin-top: 8px;
+    margin-top: 10px;
     margin-bottom: 2px;
     display: block;
   }

@@ -1,23 +1,36 @@
 import appReducer from './appReducer';
-import { updateCarLocationCreator } from './actions';
+import { updateCarLocation } from './actions';
+import { startCommandSequence, finishCommandSequence } from '../sagas/actions';
 
 describe('appReducer', () => {
   it('car should be located in correct location when execute commands', () => {
-    const action = updateCarLocationCreator([
-      'PLACE 1,1,WEST',
-      'MOVE',
-      'REPORT',
-    ]);
+    const action = updateCarLocation({ x: 1, y: 2, facing: 'EAST' }, null);
     const state = {
-      location: { x: 1, y: 2, facing: 'EAST' },
+      location: null,
       output: '',
     };
 
     const expected = {
-      location: { x: 0, y: 1, facing: 'WEST' },
-      output: '0,1,WEST',
+      location: { x: 1, y: 2, facing: 'EAST' },
+      output: null,
     };
 
+    const actual = appReducer(state, action);
+    expect(actual).toEqual(expected);
+  });
+
+  it('handles startCommandSequence action correctly ', () => {
+    const action = startCommandSequence(['']);
+    const state = { isRunning: false, output: ['1,2,WEST'] };
+    const expected = { isRunning: true, output: [] };
+    const actual = appReducer(state, action);
+    expect(actual).toEqual(expected);
+  });
+
+  it('handles finishCommandSequence action correctly ', () => {
+    const action = finishCommandSequence();
+    const state = { isRunning: true, output: ['1,2,WEST'] };
+    const expected = { isRunning: false, output: ['1,2,WEST'] };
     const actual = appReducer(state, action);
     expect(actual).toEqual(expected);
   });

@@ -4,18 +4,12 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import createMatrix from '../functions/createMatrix';
+import BusIcon from './BusIcon';
 
 const CarparkCell = styled(Cell)`
   background-color: pink;
   font-size: 50px;
 `;
-
-const facings = {
-  NORTH: '👆',
-  EAST: '👉',
-  SOUTH: '👇',
-  WEST: '👈',
-};
 
 const Carpark = ({ location }) => {
   const matrix = createMatrix(5);
@@ -25,7 +19,10 @@ const Carpark = ({ location }) => {
       <Grid columns="repeat(5, 64px)" rows="repeat(5, 64px)">
         {matrix.flat().map(([x, y]) => (
           <CarparkCell key={`${x},${y}`}>
-            {x === location.x && y === location.y && facings[location.facing]}
+            {location !== null
+              ? x === location.x &&
+                y === location.y && <BusIcon location={location} />
+              : ''}
           </CarparkCell>
         ))}
       </Grid>
@@ -38,7 +35,11 @@ Carpark.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
     facing: PropTypes.string,
-  }).isRequired,
+  }),
+};
+
+Carpark.defaultProps = {
+  location: null,
 };
 
 const mapStateToProps = state => {

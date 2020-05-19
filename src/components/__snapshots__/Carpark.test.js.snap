@@ -154,7 +154,17 @@ exports[`<Carpark/> component Carpark snapshot 1`] = `
                   <div
                     className="Cell__Cell-jsYrZv CarparkCell-dxdlKA kNUiiq"
                   >
-                    👆
+                    <BusIcon
+                      location={
+                        Object {
+                          "facing": "NORTH",
+                          "x": 0,
+                          "y": 4,
+                        }
+                      }
+                    >
+                      👆
+                    </BusIcon>
                   </div>
                 </StyledComponent>
               </CarparkCell>
