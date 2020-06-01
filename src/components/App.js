@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Carpark from './Carpark';
 import Input from './Input';
 import Output from './Output';
+import Description from './Description';
 
 const AppContainer = styled.div`
   width: fit-content;
@@ -21,6 +22,7 @@ const App = () => (
     <Carpark />
     <Input />
     <Output />
+    <Description />
   </AppContainer>
 );
 
